@@ -134,7 +134,7 @@ test('it adds packages in the deny packages list', async () => {
   const changes: Changes = [npmChange, rubyChange]
   const deniedChanges = await getDeniedChanges(
     changes,
-    ['pkg:gem/actionsomething@1.2.3'],
+    ['pkg:gem/actionsomething@3.2.0'],
     []
   )
 
