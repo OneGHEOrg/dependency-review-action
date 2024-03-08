@@ -16,7 +16,7 @@ export async function getDeniedChanges(
 
     if (deniedPackages) {
       for (const denied of deniedPackages) {
-        if (packageUrl === denied.split('@')[0].toLowerCase() && packageVer === denied.split('@')[1].toLowerCase()) {
+        if (packageUrl === denied.split('@')[0].toLowerCase() && packageVer === denied.split('@')[1]) {
           changesDenied.push(change)
           failed = true
         }
