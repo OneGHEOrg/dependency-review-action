@@ -17,8 +17,8 @@ export async function readConfig(): Promise<ConfigurationOptions> {
     const externalConfig = await readConfigFile(configFile)
 
     return ConfigurationOptionsSchema.parse({
-      ...externalConfig,
-      ...inlineConfig
+      ...inlineConfig,
+      ...externalConfig
     })
   }
 
