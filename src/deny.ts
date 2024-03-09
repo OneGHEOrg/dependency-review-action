@@ -14,11 +14,21 @@ export async function getDeniedChanges(
     const packageUrl = change.package_url.toLowerCase().split('@')[0]
     const packageVer = change.package_url.toLowerCase().split('@')[1]
 
+    // 1) Package URL has version but deny list doesn't
+    // 2) Package URL has version and so does the deny list
+    
     if (deniedPackages) {
       for (const denied of deniedPackages) {
+        deniedPackage = denied.split('@')
         if (
+            deniedPackage.length < 2 &&
+            packageUrl === deniedPackage[0].toLowerCase
+        ) {
+          changesDenied.push(change)
+          failed = true
+        } else if (
           packageUrl === denied.split('@')[0].toLowerCase() &&
-          packageVer === denied.split('@')[1]
+          packageVersion === denied.split('@')[1]
         ) {
           changesDenied.push(change)
           failed = true
