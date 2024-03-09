@@ -20,19 +20,18 @@ export async function getDeniedChanges(
     if (deniedPackages) {
       for (const denied of deniedPackages) {
         deniedPackage = denied.split('@')
-        if (deniedPackage.length < 2) {
-          if (packageUrl === deniedPackage[0].toLowerCase) {
-            changesDenied.push(change)
-            failed = true
-          }
-        } else {
-          if (
-            packageUrl === denied.split('@')[0].toLowerCase() &&
-            packageVersion === denied.split('@')[1]
-          ) {
-            changesDenied.push(change)
-            failed = true
-          }
+        if (
+            deniedPackage.length < 2 &&
+            packageUrl === deniedPackage[0].toLowerCase
+        ) {
+          changesDenied.push(change)
+          failed = true
+        } else if (
+          packageUrl === denied.split('@')[0].toLowerCase() &&
+          packageVersion === denied.split('@')[1]
+        ) {
+          changesDenied.push(change)
+          failed = true
         }
       }
     }
